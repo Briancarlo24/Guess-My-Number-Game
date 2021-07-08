@@ -1,0 +1,204 @@
+@import url("https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap");
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #1d1d1d;
+  color: #fefefe;
+  font-family: "Press Start 2P", sans-serif;
+}
+
+body p {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+}
+
+body button,
+body input {
+  font-family: "Press Start 2P", sans-serif;
+  font-size: 18px;
+  width: 200px;
+  height: 80px;
+  text-align: center;
+}
+
+body button:hover {
+  background-color: #dcdada;
+  cursor: pointer;
+}
+
+body button:active {
+  background-color: #fff6bb;
+  cursor: pointer;
+}
+
+header {
+  display: -ms-grid;
+  display: grid;
+  text-align: center;
+  padding: 30px 15px 15px;
+  justify-items: center;
+  row-gap: 1rem;
+}
+
+header h1 {
+  color: #fff6bb;
+  font-size: clamp(20px, 3.5vw, 50px);
+}
+
+header div {
+  background-color: #fefefe;
+}
+
+header .number {
+  color: #1d1d1d;
+  font-size: 5rem;
+  padding: 1.5rem 3.5rem;
+}
+
+main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap-reverse;
+      flex-wrap: wrap-reverse;
+  padding: 15px 15px 30px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+main .left {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  row-gap: 15px;
+}
+
+main .left .guess {
+  background-color: transparent;
+  border: 4px solid #fefefe;
+  padding: 5px 5px 5px 5px;
+  font-size: 4rem;
+  width: 100%;
+  height: 150px;
+  max-width: 400px;
+}
+
+main .right {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  row-gap: 5px;
+  place-items: center;
+  width: 100%;
+}
+
+main .right p {
+  padding: 5px;
+  width: 100%;
+  max-width: 400px;
+}
+
+main .right .message {
+  margin-bottom: 30px;
+}
+
+@media (min-width: 375px) {
+  body .btn {
+    width: 200px;
+    height: 70px;
+  }
+  body .btn:hover {
+    border-radius: 5px;
+  }
+  header {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 3rem;
+    height: 350px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    padding-bottom: 150px;
+    margin-bottom: 150px;
+    margin-top: 30px;
+    border-bottom: 5px solid #fefefe;
+  }
+  header h1 {
+    font-size: clamp(20px, 2.5vw, 50px);
+    -ms-flex-item-align: end;
+        align-self: flex-end;
+  }
+  header .between {
+    position: absolute;
+    right: 50px;
+    font-size: 0.9em;
+  }
+  header .again {
+    position: absolute;
+    left: 50px;
+    font-size: 1rem;
+  }
+  header .number {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, 176%);
+            transform: translate(-50%, 176%);
+    font-size: 4rem;
+    padding: 2rem;
+    width: 200px;
+  }
+  main {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: 12rem;
+  }
+  main section.left {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+  }
+  main section.left .guess {
+    border: 4px solid #fefefe;
+    color: #fefefe;
+    padding: 1rem;
+    font-size: 4rem;
+    width: 250px;
+    height: 120px;
+    max-width: 300px;
+    margin-bottom: 15px;
+  }
+  main section.left input:focus {
+    outline: none;
+  }
+  main section.right {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    place-items: center;
+    width: 100%;
+  }
+  main section.right .message {
+    margin-bottom: 90px;
+  }
+}
+/*# sourceMappingURL=style.css.map */
