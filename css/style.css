@@ -156,8 +156,9 @@ main .right .message {
   header .number {
     position: absolute;
     left: 50%;
-    -webkit-transform: translate(-50%, 176%);
-            transform: translate(-50%, 176%);
+    bottom: -75px;
+    -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
     font-size: 4rem;
     padding: 2rem;
     width: 200px;

@@ -165,7 +165,8 @@ main {
     .number {
       position: absolute;
       left: 50%;
-      transform: translate(-50%, 176%);
+      bottom: -75px;
+      transform: translateX(-50%);
       font-size: 4rem;
       padding: 2rem;
       width: 200px;
