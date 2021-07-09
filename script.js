@@ -4,6 +4,8 @@ let highestScore = document.querySelector(".highscore").textContent;
 // Get The Current Score
 let score = document.querySelector(".score").textContent;
 
+//Disable the Again Button
+
 //Generate Random Number
 function generateRandomNumber() {
   const randNum = Math.floor(Math.random() * 20) + 1;
@@ -52,6 +54,7 @@ function compareNumber(number, randomNumber) {
     //Disable the button
     document.querySelector(".check").disabled = true;
     document.querySelector(".guess").disabled = true;
+    document.querySelector(".again").disabled = false;
   } else if (number > randomNumber) {
     score--;
     document.querySelector(".message").textContent = "Too high! 🤷‍♂️";
@@ -72,11 +75,13 @@ function highestScoreChecker(currentScore, currentHighScore) {
 //Add Event on Button check
 const btnCheck = document.querySelector(".check");
 btnCheck.addEventListener("click", function () {
+  document.querySelector(".again").disabled = true;
   if (score === 0) {
     document.querySelector(".message").textContent = "You Lose! 😕☹";
     document.querySelector(".message").style.color = "red";
     document.querySelector(".check").disabled = true;
     document.querySelector(".guess").disabled = true;
+    document.querySelector(".again").disabled = false;
   } else {
     let number = numberChecker(getInputValue());
 
@@ -105,7 +110,29 @@ btnAgain.addEventListener("click", function () {
   randNum = newRandNum;
   document.querySelector(".check").disabled = false;
   document.querySelector(".guess").disabled = false;
+  document.querySelector(".again").disabled = false;
 });
 
-// Task get the highest Score
-// Change the reload event on btn again
+//MODAL SECTION
+
+const leaderboard = document.querySelector(".leaderboard");
+const overlay = document.querySelector(".modal");
+const closeModal = document.querySelector(".close-modal");
+const close = function () {
+  overlay.classList.add("hidden");
+  overlay.classList.remove("overlay");
+};
+
+leaderboard.addEventListener("click", function () {
+  overlay.classList.remove("hidden");
+  overlay.classList.add("overlay");
+});
+
+closeModal.addEventListener("click", close);
+overlay.addEventListener("click", close);
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    close();
+  }
+});

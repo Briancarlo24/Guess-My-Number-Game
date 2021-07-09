@@ -17,13 +17,14 @@ body {
   background-color: #1d1d1d;
   color: #fefefe;
   font-family: "Press Start 2P", sans-serif;
+  position: relative;
 }
 
 body p {
   font-size: clamp(1rem, 1.5vw, 1.2rem);
 }
 
-body button,
+body .btn,
 body input {
   font-family: "Press Start 2P", sans-serif;
   font-size: 18px;
@@ -32,14 +33,93 @@ body input {
   text-align: center;
 }
 
-body button:hover {
+body .btn:hover {
   background-color: #dcdada;
   cursor: pointer;
 }
 
-body button:active {
+body .btn:active {
   background-color: #fff6bb;
   cursor: pointer;
+}
+
+body .modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  padding: 7% 7%;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  min-width: 300px;
+}
+
+body .container {
+  background-color: #fefefe;
+  color: #1d1d1d;
+  padding: 3rem 1.5rem;
+  z-index: 2;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+          box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  position: relative;
+  max-width: 900px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+body .container .close-modal {
+  position: absolute;
+  top: 0.5vh;
+  right: 1vw;
+  font-size: 3rem;
+  color: #333;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 60px;
+  height: 60px;
+}
+
+body .container .close-modal:hover {
+  background-color: none;
+}
+
+body .container .close-modal:active {
+  background-color: none;
+}
+
+body .container h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: clamp(20px, 3.5vw, 50px);
+}
+
+body .container p {
+  line-height: 1.2rem;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+}
+
+/* CLASSES TO MAKE MODAL WORK */
+.hidden {
+  display: none;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  cursor: pointer;
+  z-index: 5;
 }
 
 header {
@@ -82,7 +162,6 @@ main .left {
   display: -ms-grid;
   display: grid;
   place-items: center;
-  row-gap: 15px;
 }
 
 main .left .guess {
@@ -90,9 +169,11 @@ main .left .guess {
   border: 4px solid #fefefe;
   padding: 5px 5px 5px 5px;
   font-size: 4rem;
-  width: 100%;
+  width: 60%;
   height: 150px;
   max-width: 400px;
+  min-width: 200px;
+  margin-bottom: 15px;
 }
 
 main .right {
@@ -102,17 +183,29 @@ main .right {
       grid-template-columns: 1fr;
   row-gap: 5px;
   place-items: center;
+  margin: 1rem;
   width: 100%;
 }
 
 main .right p {
   padding: 5px;
-  width: 100%;
   max-width: 400px;
+  width: 100%;
+  min-width: 200px;
 }
 
-main .right .message {
-  margin-bottom: 30px;
+main .right p:first-child {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+main .right p:last-child {
+  cursor: pointer;
+}
+
+main .right p:last-child:hover {
+  color: #fff6bb;
 }
 
 @media (min-width: 375px) {
@@ -123,19 +216,54 @@ main .right .message {
   body .btn:hover {
     border-radius: 5px;
   }
+  body .modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 50px 8vw;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+  }
+  body .container {
+    background-color: #fff;
+    color: #1d1d1d;
+    padding: 50px 5vw;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+            box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  }
+  body .container .close-modal {
+    font-size: 3rem;
+    width: 60px;
+    height: 60px;
+  }
+  body .container .close-modal:hover {
+    background-color: none;
+  }
+  body .container .close-modal:active {
+    background-color: none;
+  }
+  body .container h2 {
+    margin-bottom: 50px;
+  }
+  body .container p {
+    line-height: 1.8rem;
+  }
   header {
     position: relative;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     margin-bottom: 3rem;
-    height: 350px;
+    height: 45vh;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    padding-bottom: 150px;
-    margin-bottom: 150px;
-    margin-top: 30px;
+    padding-bottom: 15vh;
+    margin-bottom: 50px;
+    margin-top: 10px;
     border-bottom: 5px solid #fefefe;
   }
   header h1 {
@@ -167,7 +295,7 @@ main .right .message {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    margin-top: 12rem;
+    margin-top: 5rem;
   }
   main section.left {
     -webkit-box-flex: 1;
@@ -179,13 +307,15 @@ main .right .message {
     color: #fefefe;
     padding: 1rem;
     font-size: 4rem;
-    width: 250px;
+    width: 200px;
     height: 120px;
     max-width: 300px;
-    margin-bottom: 15px;
   }
   main section.left input:focus {
     outline: none;
+  }
+  main section.left .check {
+    margin-top: 0;
   }
   main section.right {
     -webkit-box-flex: 1;
@@ -195,11 +325,11 @@ main .right .message {
     display: grid;
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
-    place-items: center;
     width: 100%;
   }
   main section.right .message {
-    margin-bottom: 90px;
+    padding-top: 15px;
+    padding-bottom: 30px;
   }
 }
 /*# sourceMappingURL=style.css.map */

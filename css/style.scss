@@ -38,12 +38,13 @@ body {
   background-color: map-get($colors, primary);
   color: map-get($colors, text);
   font-family: "Press Start 2P", sans-serif;
+  position: relative;
 
   p {
     font-size: myFont(p-sm);
   }
 
-  button,
+  .btn,
   input {
     font-family: "Press Start 2P", sans-serif;
     font-size: 18px;
@@ -51,14 +52,87 @@ body {
     height: 80px;
     text-align: center;
   }
-  button:hover {
+  .btn:hover {
     background-color: color(btnHover);
     cursor: pointer;
   }
-  button:active {
+  .btn:active {
     background-color: color(accent);
     cursor: pointer;
   }
+  .modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    padding: 7% 7%;
+
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    min-width: 300px;
+  }
+
+  .container {
+    background-color: color(text);
+    color: color(primary);
+    padding: 3rem 1.5rem;
+    z-index: 2;
+    border-radius: 5px;
+    box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+    position: relative;
+    max-width: 900px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .close-modal {
+      position: absolute;
+      top: 0.5vh;
+      right: 1vw;
+      font-size: 3rem;
+      color: #333;
+      cursor: pointer;
+      border: none;
+      background: none;
+      width: 60px;
+      height: 60px;
+    }
+
+    .close-modal:hover {
+      background-color: none;
+    }
+    .close-modal:active {
+      background-color: none;
+    }
+
+    h2 {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      font-size: myFont(h1-sm);
+    }
+
+    p {
+      line-height: 1.2rem;
+      font-size: myFont(p-sm);
+    }
+  }
+}
+/* CLASSES TO MAKE MODAL WORK */
+.hidden {
+  display: none;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  cursor: pointer;
+  z-index: 5;
 }
 
 header {
@@ -92,15 +166,17 @@ main {
   .left {
     display: grid;
     place-items: center;
-    row-gap: 15px;
+
     .guess {
       background-color: transparent;
       border: 4px solid color(text);
       padding: 5px 5px 5px 5px;
       font-size: 4rem;
-      width: 100%;
+      width: 60%;
       height: 150px;
       max-width: 400px;
+      min-width: 200px;
+      margin-bottom: 15px;
     }
   }
 
@@ -109,20 +185,33 @@ main {
     grid-template-columns: 1fr;
     row-gap: 5px;
     place-items: center;
+    margin: 1rem;
     width: 100%;
 
     p {
       padding: 5px;
-      width: 100%;
       max-width: 400px;
+      width: 100%;
+      min-width: 200px;
     }
 
-    .message {
-      margin-bottom: 30px;
+    p:first-child {
+      font-size: myFont(p-sm);
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    p:last-child {
+      cursor: pointer;
+    }
+
+    p:last-child:hover {
+      color: color(accent);
     }
   }
 }
 
+//Desktop Design
 @media (min-width: 375px) {
   body {
     .btn {
@@ -133,17 +222,58 @@ main {
     .btn:hover {
       border-radius: 5px;
     }
+
+    .modal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 50px 8vw;
+
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+    }
+
+    .container {
+      background-color: #fff;
+      color: color(primary);
+      padding: 50px 5vw;
+      border-radius: 5px;
+      box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+
+      .close-modal {
+        font-size: 3rem;
+        width: 60px;
+        height: 60px;
+      }
+
+      .close-modal:hover {
+        background-color: none;
+      }
+      .close-modal:active {
+        background-color: none;
+      }
+
+      h2 {
+        margin-bottom: 50px;
+      }
+
+      p {
+        line-height: 1.8rem;
+      }
+    }
   }
 
   header {
     position: relative;
     display: flex;
     margin-bottom: 3rem;
-    height: 350px;
+    height: 45vh;
     justify-content: center;
-    padding-bottom: 150px;
-    margin-bottom: 150px;
-    margin-top: 30px;
+    padding-bottom: 15vh;
+    margin-bottom: 50px;
+    margin-top: 10px;
     border-bottom: 5px solid color(text);
 
     h1 {
@@ -175,7 +305,7 @@ main {
 
   main {
     display: flex;
-    margin-top: 12rem;
+    margin-top: 5rem;
 
     section.left {
       flex: 1;
@@ -185,13 +315,16 @@ main {
         color: color(text);
         padding: 1rem;
         font-size: 4rem;
-        width: 250px;
+        width: 200px;
         height: 120px;
         max-width: 300px;
-        margin-bottom: 15px;
       }
+
       input:focus {
         outline: none;
+      }
+      .check {
+        margin-top: 0;
       }
     }
 
@@ -199,10 +332,11 @@ main {
       flex: 1;
       display: grid;
       grid-template-columns: 1fr;
-      place-items: center;
       width: 100%;
+
       .message {
-        margin-bottom: 90px;
+        padding-top: 15px;
+        padding-bottom: 30px;
       }
     }
   }
